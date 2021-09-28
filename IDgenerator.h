@@ -1,6 +1,9 @@
 #include <string>
 #include <random>
 
+#ifndef ID_GENERATOR
+#define ID_GENERATOR
+
 namespace LogicGateNN {
 	static class IDgenerator
 	{
@@ -12,3 +15,5 @@ namespace LogicGateNN {
 		static std::string NewID();
 	};
 }
+
+#endif
