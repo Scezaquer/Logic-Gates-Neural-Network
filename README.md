@@ -28,9 +28,13 @@ Topology is a dim 3 string array containing every node in the following architec
 		[ ["Type_of_the_node", "Layer", "ID"], [input's IDs], [output's IDs] ]	]
 
 "Type_of_the_node" can be "AND", "NAND", "OR, "XOR", "NOR" depending on the operation it performs
+
 "Layer" is a number stored as a string
+
 "ID" is the ID of the node
+
 input's IDs is an array of all the ID's of input nodes
+
 output's IDs is an array of all the ID's of input nodes
 
 
