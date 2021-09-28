@@ -9,5 +9,9 @@
 
 // ajouter les en-têtes à précompiler ici
 #include "framework.h"
+#include "Gates.h"
+#include "Node.h"
+#include "IDgenerator.h"
+#include "NeuralNetwork.h"
 
 #endif //PCH_H
