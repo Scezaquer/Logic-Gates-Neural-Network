@@ -15,7 +15,8 @@ propagate through all the network changing only what should be affected and not 
 Upon creation, each node is given a random 16-char long ID to identify links when saving and loading the model.
 
 A node should only receive inputs from an other node located in a previous layer, while only outputing to nodes
-located on the next layer. This is to prevent infinite loops from occuring.
+located on following layers. This is to prevent infinite loops from occuring. It does not have to be the layers right
+before or direcly after this node however. You can skip as many as you want.
 
 
 When saving a neural network, we are saving its topology. Reverse when loading it.
