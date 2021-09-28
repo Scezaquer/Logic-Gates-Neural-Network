@@ -1,8 +1,14 @@
 #include <string>
 #include <random>
-static class IDgenerator
-{
-public:
-	static std::string NewID();
-};
 
+namespace LogicGateNN {
+	static class IDgenerator
+	{
+		/*
+		A class containing a single function creating a random 16 character long string used to uniquely identify each node
+		*/
+
+	public:
+		static std::string NewID();
+	};
+}

@@ -1,6 +1,6 @@
 #include "../headers/IDgenerator.h"
 
-std::string IDgenerator::NewID() {
+std::string LogicGateNN::IDgenerator::NewID() {
     const std::string CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     std::random_device random_device;

@@ -1,6 +1,6 @@
 #include "../headers/Node.h"
 
-Node::Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>, int)) {
+LogicGateNN::Node::Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>, int)) {
 
 	/*
 	Constructor of the Node class
@@ -13,7 +13,7 @@ Node::Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>, int)) {
 	this->ID = IDgenerator::NewID();
 }
 
-bool Node::evaluate() {
+bool LogicGateNN::Node::evaluate() {
 
 	/*
 	Returns the value this->output should have
@@ -28,6 +28,6 @@ bool Node::evaluate() {
 	return (this->gate)(arrayinputs, this->Ninputs);
 }
 
-bool Node::getOutput() {
+bool LogicGateNN::Node::getOutput() {
 	return this->output;
 }
