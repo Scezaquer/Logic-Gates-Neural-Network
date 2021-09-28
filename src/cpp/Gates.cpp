@@ -1,33 +1,33 @@
 #include "../headers/Gates.h"
 
-static bool Gates::AND(bool inputs[]) {
+bool Gates::AND(bool inputs[], int Ninputs) {
 	bool result = false;
-	for (bool x : inputs) {
-		result &= x;
+	for (int x = 0; x < Ninputs; x++) {
+		result &= inputs[x];
 	}
 	return result;
 }
 
-static bool Gates::OR(bool inputs[]) {
+bool Gates::OR(bool inputs[], int Ninputs) {
 	bool result = false;
-	for (bool x : inputs) {
-		result |= x;
+	for (int x = 0; x < Ninputs; x++) {
+		result |= inputs[x];
 	}
 	return result;
 }
 
-static bool Gates::NAND(bool inputs[]) {
-	return ! AND(inputs);
+bool Gates::NAND(bool inputs[], int Ninputs) {
+	return ! AND(inputs, Ninputs);
 }
 
-static bool Gates::NOR(bool inputs[]) {
-	return !OR(inputs);
+bool Gates::NOR(bool inputs[], int Ninputs) {
+	return !OR(inputs, Ninputs);
 }
 
-static bool Gates::XOR(bool inputs[]) {
+bool Gates::XOR(bool inputs[], int Ninputs) {
 	bool result = false;
-	for (bool x : inputs) {
-		result ^= x;
+	for (int x = 0; x < Ninputs; x++) {
+		result ^= inputs[x];
 	}
 	return result;
 }
