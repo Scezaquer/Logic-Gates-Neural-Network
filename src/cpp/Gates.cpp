@@ -1,6 +1,6 @@
 #include "../headers/Gates.h"
 
-bool Gates::AND(bool inputs[], int Ninputs) {
+bool AND(std::vector<bool> inputs, int Ninputs) {
 	bool result = false;
 	for (int x = 0; x < Ninputs; x++) {
 		result &= inputs[x];
@@ -8,7 +8,7 @@ bool Gates::AND(bool inputs[], int Ninputs) {
 	return result;
 }
 
-bool Gates::OR(bool inputs[], int Ninputs) {
+bool OR(std::vector<bool> inputs, int Ninputs) {
 	bool result = false;
 	for (int x = 0; x < Ninputs; x++) {
 		result |= inputs[x];
@@ -16,15 +16,15 @@ bool Gates::OR(bool inputs[], int Ninputs) {
 	return result;
 }
 
-bool Gates::NAND(bool inputs[], int Ninputs) {
+bool NAND(std::vector<bool> inputs, int Ninputs) {
 	return ! AND(inputs, Ninputs);
 }
 
-bool Gates::NOR(bool inputs[], int Ninputs) {
+bool NOR(std::vector<bool> inputs, int Ninputs) {
 	return !OR(inputs, Ninputs);
 }
 
-bool Gates::XOR(bool inputs[], int Ninputs) {
+bool XOR(std::vector<bool> inputs, int Ninputs) {
 	bool result = false;
 	for (int x = 0; x < Ninputs; x++) {
 		result ^= inputs[x];

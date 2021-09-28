@@ -99,12 +99,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\cpp\IDgenerator.cpp" />
     <ClCompile Include="src\cpp\Gates.cpp" />
     <ClCompile Include="src\cpp\main.cpp" />
     <ClCompile Include="src\cpp\NeuralNetwork.cpp" />
     <ClCompile Include="src\cpp\Node.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\headers\IDgenerator.h" />
     <ClInclude Include="src\headers\Gates.h" />
     <ClInclude Include="src\headers\NeuralNetwork.h" />
     <ClInclude Include="src\headers\Node.h" />

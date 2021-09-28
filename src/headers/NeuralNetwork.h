@@ -1,3 +1,9 @@
+/*
+@file main.cpp
+@author Aurélien Bück-Kaeffer
+@version 0.2 09/27/2021
+*/
+
 #include "Node.h"
 
 class NeuralNetwork{

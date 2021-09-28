@@ -1,7 +1,7 @@
-static class Gates {
-	static bool AND(bool inputs[], int Ninputs);
-	static bool OR(bool inputs[], int Ninputs);
-	static bool NAND(bool inputs[], int Ninputs);
-	static bool NOR(bool inputs[], int Ninputs);
-	static bool XOR(bool inputs[], int Ninputs);
-};
+#include <vector>
+
+static bool AND(std::vector<bool> inputs, int Ninputs);
+static bool OR(std::vector<bool> inputs, int Ninputs);
+static bool NAND(std::vector<bool> inputs, int Ninputs);
+static bool NOR(std::vector<bool> inputs, int Ninputs);
+static bool XOR(std::vector<bool> inputs, int Ninputs);
