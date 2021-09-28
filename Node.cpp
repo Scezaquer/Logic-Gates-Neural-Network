@@ -23,7 +23,7 @@ bool LogicGateNN::Node::evaluate() {
 	std::vector<bool> arrayinputs;
 
 	for (int x = 0; x < this->Ninputs; x++) {				//
-		arrayinputs.push_back(this->inputs[x]->output);		//Gets all the outputs from the right nodes
+		arrayinputs.push_back(this->inputs[x]->output);		//Gets all the outputs from the previous nodes
 	}														//
 
 	return (this->gate)(arrayinputs, this->Ninputs);
@@ -31,4 +31,11 @@ bool LogicGateNN::Node::evaluate() {
 
 bool LogicGateNN::Node::getOutput() {
 	return this->output;
+}
+
+void LogicGateNN::Node::run() {
+	/*TODO: This function
+	Make sure it runs all the output nodes if the output from this one has changed only,
+	to only compute what is necessary
+	*/
 }

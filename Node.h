@@ -2,6 +2,8 @@
 #include "IDgenerator.h"
 #include <vector>
 
+//TODO: create first and last layer nodes
+
 namespace LogicGateNN {
 	class Node {
 	private:

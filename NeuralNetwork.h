@@ -4,6 +4,8 @@
 @version 0.2.1 09/28/2021
 */
 
+//TODO: this class, and give it mutation functions to use it with genetic algorithms
+
 #include "Node.h"
 namespace LogicGateNN {
 	class NeuralNetwork {
