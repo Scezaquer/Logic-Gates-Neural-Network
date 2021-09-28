@@ -1,2 +1,0 @@
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Debug\Logic-Gates-Neural-Network.pdb
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Debug\Logic-Gates-Neural-Network.exe

@@ -1,0 +1,11 @@
+﻿  pch.cpp
+  IDgenerator.cpp
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\IDgenerator.h(13,3): warning C4091: 'static ' : ignoré à gauche de 'LogicGateNN::IDgenerator' quand aucune variable n'est déclarée
+  LogicGateNN.cpp
+  NeuralNetwork.cpp
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\IDgenerator.h(13,3): warning C4091: 'static ' : ignoré à gauche de 'LogicGateNN::IDgenerator' quand aucune variable n'est déclarée
+  Node.cpp
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\IDgenerator.h(13,3): warning C4091: 'static ' : ignoré à gauche de 'LogicGateNN::IDgenerator' quand aucune variable n'est déclarée
+  Gates.cpp
+  Génération de code en cours...
+  LogicGateNN.vcxproj -> C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Debug\LogicGateNN.lib

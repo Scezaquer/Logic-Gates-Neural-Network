@@ -1,0 +1,4 @@
+C:\Users\Aurélien\source\repos\LogicGateNN\Debug\LogicGateNN.lib
+C:\Users\Aurélien\source\repos\LogicGateNN\Debug\LogicGateNN.pdb
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Debug\LogicGateNN.lib
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Debug\LogicGateNN.pdb
