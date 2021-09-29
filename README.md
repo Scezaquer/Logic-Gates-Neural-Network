@@ -39,6 +39,4 @@ input's IDs is an array of all the ID's of input nodes
 output's IDs is an array of all the ID's of input nodes
 
 
-Once loaded, the nodes forming a network are stored in a 1 dim unordered node array (NeuralNetwork.Network).
-Pointers to the input nodes are stored in NeuralNetwork.InputNodes
-Pointers to the output nodes are stored in NeuralNetwork.OutputNodes
+Once loaded, the nodes forming a network are stored in a 2 dim node array (NeuralNetwork.Network).
