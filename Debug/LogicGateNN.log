@@ -1,16 +1,19 @@
 ﻿  pch.cpp
 C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\IDgenerator.h(16,3): warning C4091: 'static ' : ignoré à gauche de 'LogicGateNN::IDgenerator' quand aucune variable n'est déclarée
-  Gates.cpp
   IDgenerator.cpp
   LogicGateNN.cpp
   NeuralNetwork.cpp
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(67,20): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(69,22): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(73,6): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(74,6): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(80,22): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(84,6): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(85,6): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(57,20): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(58,21): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(63,23): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(64,24): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(70,8): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(71,8): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(85,23): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(86,24): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(92,8): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(93,8): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
   Node.cpp
+  Gates.cpp
   Génération de code en cours...
   LogicGateNN.vcxproj -> C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Debug\LogicGateNN.lib

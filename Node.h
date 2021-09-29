@@ -21,6 +21,9 @@ namespace LogicGateNN {
 		std::vector<Node*> inputNodes;			//Pointers to the nodes that send inputs
 		std::vector<Node*> outputNodes;			//Pointers to the nodes that shall receive the output
 
+		std::vector<std::string> inputIDs;		//ID's of the input nodes
+		std::vector<std::string> outputIDs;		//ID's of the output nodes
+
 		Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>, int), int layer);	//Constructor
 		Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>, int), int layer, std::string ID);	//Constructor of nodes loaded from a saved network
 		Node(int Noutputs);													//Constructor of nodes in the first layer
