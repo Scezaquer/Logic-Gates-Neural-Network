@@ -1,5 +1,5 @@
 # Logic-Gates-Neural-Network
-A simplistic neural-network library using only logic-gates for neurons and true/false as arguments and outputs.
+A simplistic neural-network library using only logic-gates instead of perceptrons and true/false as arguments and outputs.
 
 Each network is an array of nodes organized in layers.
 
