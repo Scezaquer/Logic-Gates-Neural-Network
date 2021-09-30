@@ -1,6 +1,8 @@
 # Logic-Gates-Neural-Network
 A simplistic neural-network library using only logic-gates instead of perceptrons and true/false as arguments and outputs.
 
+Namespace : LogicGateNN
+
 Each network is an array of nodes organized in layers.
 
 A node is a logic gate with other nodes as inputs and other nodes as outputs (except for the ones in the first and the last layer,
