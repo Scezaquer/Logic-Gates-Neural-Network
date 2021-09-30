@@ -1,7 +1,7 @@
 /*
 @file NeuralNetwork.h
 @author Aurélien Bück-Kaeffer
-@version 0.5 09/28/2021
+@version 0.6 09/30/2021
 */
 
 //TODO: this class, and give it mutation functions to use it with genetic algorithms

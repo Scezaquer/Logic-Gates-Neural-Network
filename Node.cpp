@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Node.h"
 
-LogicGateNN::Node::Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>, int), int layer) {
+LogicGateNN::Node::Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>), int layer) {
 
 	/*
 	Constructor of the Node class
@@ -16,7 +16,7 @@ LogicGateNN::Node::Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool
 	this->output = false;
 }
 
-LogicGateNN::Node::Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>, int), int layer, std::string ID) {
+LogicGateNN::Node::Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>), int layer, std::string ID) {
 
 	/*
 	Constructor of the Node class if the ID is already known (loaded from a saved network)
@@ -56,7 +56,7 @@ bool LogicGateNN::Node::evaluate() {
 		arrayinputs.push_back(this->inputNodes[x]->output);		//Gets all the outputs from the previous nodes
 	}														//
 
-	return (this->gate)(arrayinputs, this->Ninputs);
+	return (this->gate)(arrayinputs);
 }
 
 void LogicGateNN::Node::update() {
@@ -122,5 +122,33 @@ void LogicGateNN::Node::run(bool state) {
 }
 
 int LogicGateNN::Node::getLayer() {
+	/*
+	Returns the layer this node is in
+	*/
 	return this->layer;
+}
+
+void LogicGateNN::Node::addInput(LogicGateNN::Node* InNode) {
+	/*
+	Adds an input to the node by adding the pointer passed as argument in the "inputNodes" array
+	and the ID of said node in the "inputIDs" array
+	*/
+	this->inputNodes.push_back(InNode);
+	this->inputIDs.push_back(InNode->getID());
+}
+
+void LogicGateNN::Node::addOutput(LogicGateNN::Node* OutNode) {
+	/*
+	Adds an output to the node by adding the pointer passed as argument in the "outputNodes" array
+	and the ID of said node in the "outputIDs" array
+	*/
+	this->outputNodes.push_back(OutNode);
+	this->outputIDs.push_back(OutNode->getID());
+}
+
+void LogicGateNN::Node::setGate(bool (*func)(std::vector<bool>)) {
+	/*
+	Sets the logic gate applied by the Node to be whatever is specified in the argument
+	*/
+	this->gate = func;
 }

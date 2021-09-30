@@ -24,7 +24,7 @@ LogicGateNN::NeuralNetwork::NeuralNetwork(LogicGateNN::NeuralNetwork::Net topolo
 
 		//Loads the gate type
 		//switch statements don't work on strings and its annoying to make one so whatever
-		bool (*gate)(std::vector<bool>, int) = LogicGateNN::OR;
+		bool (*gate)(std::vector<bool>) = LogicGateNN::OR;
 		if (x[0][0].compare("AND")) {
 			gate = LogicGateNN::AND;
 		}
@@ -137,13 +137,81 @@ LogicGateNN::NeuralNetwork::NeuralNetwork(int Ninputs, int Noutputs, bool autofi
 	}
 
 	this->Network.push_back(layer);	//Adds the layer to the network
-	layer.clear();					//Clears this array to use it for the next layer
+	layer.clear();	
 
-	if (autofill){//Creation of random connections between the neurons
-		for (std::vector<LogicGateNN::Node> layer : this->Network) {
-			for (LogicGateNN::Node x : layer) {
-				if (x.getLayer() != 0) {	//crée des connections inputs uniquement si c'est pas dans la first layer
+	if (autofill){
 
+		/////////////Creation of random connections between the neurons//////////////
+
+		for (std::vector<LogicGateNN::Node> layer : this->Network) {	//For each Node
+			for (LogicGateNN::Node x : layer) {							//
+
+				/////////////////////////////Input Links
+				std::vector<LogicGateNN::Node *> InputNodes;
+
+				for (int i = 0; i < x.getLayer(); i++) {
+					for (LogicGateNN::Node b : this->Network[i]) {	//Creates an array of all potential input nodes
+						InputNodes.push_back(&b);
+					}
+				}
+				int nbrInputs = std::min(std::rand() % 3 + 1, (int) InputNodes.size());	//Makes between 1 and 3 input links, except if that's more than the possible number of inputs
+
+				for (int i = 0; i < nbrInputs; i++) {
+
+					int rdmindex = std::rand() % InputNodes.size();	//Selects a possible input node at random
+
+					InputNodes[rdmindex]->addOutput(&x);			//Creates the link
+					x.addInput(InputNodes[rdmindex]);				//
+
+					InputNodes.erase(InputNodes.begin()+rdmindex);	//Deletes this node from the list of possible inputs
+				}
+
+				/////////////////////////////Output links
+
+				std::vector<LogicGateNN::Node*> OutputNodes;
+
+				for (int i = x.getLayer()+1; i < this->Network.size(); i++) {
+					for (LogicGateNN::Node b : this->Network[i]) {	//Creates an array of all potential output nodes
+						OutputNodes.push_back(&b);
+					}
+				}
+				int nbrOutputs = std::min(std::rand() % 3 + 1, (int)OutputNodes.size());	//Makes between 1 and 3 output links, except if that's more than the possible number of outputs
+
+				for (int i = 0; i < nbrOutputs; i++) {
+
+					int rdmindex = std::rand() % OutputNodes.size();	//Selects a possible input node at random
+
+					OutputNodes[rdmindex]->addInput(&x);			//Creates the link
+					x.addOutput(OutputNodes[rdmindex]);				//
+
+					OutputNodes.erase(OutputNodes.begin() + rdmindex);	//Deletes this node from the list of possible inputs
+				}
+
+			}
+		}
+
+		////////////////Sets the gates of the neurons at random////////////////
+
+		for (int layer = 1; layer < this->Network.size(); layer++) {	//For each Node except those from the first layer
+			for (LogicGateNN::Node x : Network[layer]) {				//By convention the first layer's nodes' gates are "OR", even if they technically aren't used
+				
+				int GateType = std::rand() % 5;	//Select a type of gate at random and sets it
+				switch (GateType) {
+				case 0:
+					x.setGate(LogicGateNN::AND);
+					break;
+				case 1:
+					x.setGate(LogicGateNN::OR);
+					break;
+				case 2:
+					x.setGate(LogicGateNN::NAND);
+					break;
+				case 3:
+					x.setGate(LogicGateNN::NOR);
+					break;
+				case 4:
+					x.setGate(LogicGateNN::XOR);
+					break;
 				}
 			}
 		}
@@ -151,13 +219,16 @@ LogicGateNN::NeuralNetwork::NeuralNetwork(int Ninputs, int Noutputs, bool autofi
 }
 
 int LogicGateNN::NeuralNetwork::getNlayers() {
+	//Returns the number of layers in the network
 	return this->Network.size();
 }
 
 int LogicGateNN::NeuralNetwork::getNinputs() {
+	//Returns the number of inputs of the network
 	return this->Network[0].size();
 }
 
 int LogicGateNN::NeuralNetwork::getNoutputs() {
+	//Returns the number of outputs of the network
 	return this->Network[Network.size()-1].size();
 }

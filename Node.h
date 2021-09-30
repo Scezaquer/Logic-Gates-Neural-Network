@@ -12,20 +12,20 @@ namespace LogicGateNN {
 		int Ninputs;						//Number of inputs in the node
 		int Noutputs;						//Number of outputs in the node
 		int layer;							//The layer in which this node is located in the nn. It cannot send information to nodes of te same or a previous layer to avoid infinite loops.
-		bool (*gate)(std::vector<bool>, int);	//Logic gate applied by the node
+		bool (*gate)(std::vector<bool>);	//Logic gate applied by the node
 
 		bool output;						//Output
 
 	public:
-
+		//Maybe make those private?
 		std::vector<Node*> inputNodes;			//Pointers to the nodes that send inputs
 		std::vector<Node*> outputNodes;			//Pointers to the nodes that shall receive the output
 
 		std::vector<std::string> inputIDs;		//ID's of the input nodes
 		std::vector<std::string> outputIDs;		//ID's of the output nodes
 
-		Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>, int), int layer);	//Constructor
-		Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>, int), int layer, std::string ID);	//Constructor of nodes loaded from a saved network
+		Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>), int layer);	//Constructor
+		Node(int Ninputs, int Noutputs, bool (*gate)(std::vector<bool>), int layer, std::string ID);	//Constructor of nodes loaded from a saved network
 		Node(int Noutputs);													//Constructor of nodes in the first layer
 		bool evaluate();													//Calculates what the output should be given the inputs and returns it
 		void update();														//Updates the output given the current inputs
@@ -34,7 +34,10 @@ namespace LogicGateNN {
 		bool getOutput();													//returns the output of the node
 		void setOutput(bool output);										//Sets the value of the output regardless of the inputs
 		std::string getID();												//returns the ID
-		int getLayer();														//returns the layer
+		int getLayer();														//returns the layer in which this node is located
+		void addInput(LogicGateNN::Node* InNode);							//Adds an input to this node
+		void addOutput(LogicGateNN::Node* OutNode);							//Adds an output to this node
+		void setGate(bool (*func)(std::vector<bool>));						//Changes the logic gate applied by the node
 	};
 }
 
