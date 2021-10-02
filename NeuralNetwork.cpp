@@ -2,6 +2,8 @@
 #include "NeuralNetwork.h"
 
 //TODO: A way to save and load neural networks 
+//TODO: A way to mutate NNs
+//TODO: A way to breed NNs
 
 LogicGateNN::NeuralNetwork::NeuralNetwork(LogicGateNN::NeuralNetwork::Net topology) {
 	/*
@@ -218,6 +220,36 @@ LogicGateNN::NeuralNetwork::NeuralNetwork(int Ninputs, int Noutputs, bool autofi
 	}
 }
 
+std::vector<bool> LogicGateNN::NeuralNetwork::run() {
+	for (int x = 1; x < this->Network.size(); x++) {
+		for (LogicGateNN::Node y : this->Network[x]) {
+			y.update();
+		}
+	}
+	std::vector<bool> output;
+	for (LogicGateNN::Node x : this->Network[this->Network.size() - 1]) {
+		output.push_back(x.getOutput());
+	}
+	return output;
+}
+
+std::vector<bool> LogicGateNN::NeuralNetwork::run(int index, bool value) {
+	/*
+	Sets the value of the input node at the specified index
+	*/
+	this->Network[0][index].setOutput(value);
+	this->Network[0][index].run();
+}
+
+std::vector<bool> LogicGateNN::NeuralNetwork::run(std::vector<bool> inputs) {
+	/*
+	Sets the inputs of the network to be the values in the array and runs it, returning the updated outputs
+	The array must be of size = Number of inputs in the network
+	*/
+	this->setInputs(inputs);
+	return this->run();
+}
+
 int LogicGateNN::NeuralNetwork::getNlayers() {
 	//Returns the number of layers in the network
 	return this->Network.size();
@@ -231,4 +263,23 @@ int LogicGateNN::NeuralNetwork::getNinputs() {
 int LogicGateNN::NeuralNetwork::getNoutputs() {
 	//Returns the number of outputs of the network
 	return this->Network[Network.size()-1].size();
+}
+
+std::vector<bool> LogicGateNN::NeuralNetwork::getOutputs() {
+	//return the current values of the last layer, DOES NOT UPDATE THEM, USE NeuralNetwork.run() FOR THAT
+	std::vector<bool> output;
+	for (LogicGateNN::Node x : this->Network[this->Network.size() - 1]) {
+		output.push_back(x.getOutput());
+	}
+	return output;
+}
+
+void LogicGateNN::NeuralNetwork::setInputs(std::vector<bool> inputs) {
+	/*
+	Sets the inputs of the network to be the values in the array
+	The array must be of size = Number of inputs in the network
+	*/
+	for (int x = 0; x < inputs.size(); x++) {
+		this->Network[0][x].setOutput(inputs[x]);
+	}
 }

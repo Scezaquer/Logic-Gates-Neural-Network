@@ -53,10 +53,12 @@ bool LogicGateNN::Node::evaluate() {
 	std::vector<bool> arrayinputs;
 
 	for (int x = 0; x < this->Ninputs; x++) {				//
-		arrayinputs.push_back(this->inputNodes[x]->output);		//Gets all the outputs from the previous nodes
+		arrayinputs.push_back(this->inputNodes[x]->output);	//Gets all the outputs from the previous nodes
 	}														//
-
-	return (this->gate)(arrayinputs);
+	if (arrayinputs.size() > 0) {
+		return (this->gate)(arrayinputs);
+	}
+	return this->output;
 }
 
 void LogicGateNN::Node::update() {
