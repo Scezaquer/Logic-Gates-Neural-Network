@@ -200,7 +200,7 @@ std::vector<bool> LogicGateNN::NeuralNetwork::run() {
 
 std::vector<bool> LogicGateNN::NeuralNetwork::run(int index, bool value) {
 	/*
-	Sets the value of the input node at the specified index
+	Sets the value of the input node at the specified index and then runs the network
 	*/
 	this->Network[0][index].setOutput(value);
 	this->Network[0][index].run();
@@ -280,7 +280,7 @@ void LogicGateNN::NeuralNetwork::create_lonely_node(int layer, bool (*gate)(std:
 
 void LogicGateNN::NeuralNetwork::create_lonely_node(int layer, bool (*gate)(std::vector<bool>), std::string ID) {
 	/*
-	Creates a node in the specified layer with no links adn a user-defined ID. It is useless by itself.
+	Creates a node in the specified layer with no links and a user-defined ID. It is useless by itself.
 	*/
 	this->Network[layer].push_back(LogicGateNN::Node(1, 1, gate, layer, ID));
 }
