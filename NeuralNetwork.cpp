@@ -148,46 +148,11 @@ LogicGateNN::NeuralNetwork::NeuralNetwork(int Ninputs, int Noutputs, bool autofi
 		for (std::vector<LogicGateNN::Node> layer : this->Network) {	//For each Node
 			for (LogicGateNN::Node x : layer) {							//
 
-				/////////////////////////////Input Links
-				std::vector<LogicGateNN::Node *> InputNodes;
+				//Input Links
+				this->create_random_input_link(x, std::rand() % 3 + 1);
 
-				for (int i = 0; i < x.getLayer(); i++) {
-					for (LogicGateNN::Node b : this->Network[i]) {	//Creates an array of all potential input nodes
-						InputNodes.push_back(&b);
-					}
-				}
-				int nbrInputs = std::min(std::rand() % 3 + 1, (int) InputNodes.size());	//Makes between 1 and 3 input links, except if that's more than the possible number of inputs
-
-				for (int i = 0; i < nbrInputs; i++) {
-
-					int rdmindex = std::rand() % InputNodes.size();	//Selects a possible input node at random
-
-					InputNodes[rdmindex]->addOutput(&x);			//Creates the link
-					x.addInput(InputNodes[rdmindex]);				//
-
-					InputNodes.erase(InputNodes.begin()+rdmindex);	//Deletes this node from the list of possible inputs
-				}
-
-				/////////////////////////////Output links
-
-				std::vector<LogicGateNN::Node*> OutputNodes;
-
-				for (int i = x.getLayer()+1; i < this->Network.size(); i++) {
-					for (LogicGateNN::Node b : this->Network[i]) {	//Creates an array of all potential output nodes
-						OutputNodes.push_back(&b);
-					}
-				}
-				int nbrOutputs = std::min(std::rand() % 3 + 1, (int)OutputNodes.size());	//Makes between 1 and 3 output links, except if that's more than the possible number of outputs
-
-				for (int i = 0; i < nbrOutputs; i++) {
-
-					int rdmindex = std::rand() % OutputNodes.size();	//Selects a possible input node at random
-
-					OutputNodes[rdmindex]->addInput(&x);			//Creates the link
-					x.addOutput(OutputNodes[rdmindex]);				//
-
-					OutputNodes.erase(OutputNodes.begin() + rdmindex);	//Deletes this node from the list of possible inputs
-				}
+				//Output links
+				this->create_random_output_link(x, std::rand() % 3 + 1);
 
 			}
 		}
@@ -281,5 +246,89 @@ void LogicGateNN::NeuralNetwork::setInputs(std::vector<bool> inputs) {
 	*/
 	for (int x = 0; x < inputs.size(); x++) {
 		this->Network[0][x].setOutput(inputs[x]);
+	}
+}
+
+void LogicGateNN::NeuralNetwork::create_node(int layer, bool (*gate)(std::vector<bool>)) {
+	/*
+	Creates a node at the specified emplacement with, by default, a random input and output
+	Use LogicGateNN::NeuralNetwork::create_lonely_node to not create random input and output links
+	*/
+	LogicGateNN::Node node = LogicGateNN::Node(1, 1, gate, layer);
+	this->create_random_input_link(node, 1);
+	this->create_random_output_link(node, 1);
+	this->Network[layer].push_back(node);
+}
+
+void LogicGateNN::NeuralNetwork::create_node(int layer, bool (*gate)(std::vector<bool>), std::string ID) {
+	/*
+	Creates a node at the specified emplacement with, by default, a random input and output, and a user-defined ID
+	Use LogicGateNN::NeuralNetwork::create_lonely_node to not create random input and output links
+	*/
+	LogicGateNN::Node node = LogicGateNN::Node(1, 1, gate, layer, ID);
+	this->create_random_input_link(node, 1);
+	this->create_random_output_link(node, 1);
+	this->Network[layer].push_back(node);
+}
+
+void LogicGateNN::NeuralNetwork::create_lonely_node(int layer, bool (*gate)(std::vector<bool>)) {
+	/*
+	Creates a node in the specified layer with no links. It is useless by itself.
+	*/
+	this->Network[layer].push_back(LogicGateNN::Node(1, 1, gate, layer));
+}
+
+void LogicGateNN::NeuralNetwork::create_lonely_node(int layer, bool (*gate)(std::vector<bool>), std::string ID) {
+	/*
+	Creates a node in the specified layer with no links adn a user-defined ID. It is useless by itself.
+	*/
+	this->Network[layer].push_back(LogicGateNN::Node(1, 1, gate, layer, ID));
+}
+
+void LogicGateNN::NeuralNetwork::create_random_input_link(LogicGateNN::Node node, int nbr) {
+	/*
+	Creates n=nbr input links on the specified node at random, except if its not possible to do that many
+	*/
+	std::vector<LogicGateNN::Node*> InputNodes;
+
+	for (int i = 0; i < node.getLayer(); i++) {
+		for (LogicGateNN::Node b : this->Network[i]) {	//Creates an array of all potential input nodes
+			InputNodes.push_back(&b);
+		}
+	}
+	int nbrInputs = std::min(nbr, (int)InputNodes.size());	//Makes n=nbr input links, except if that's more than the possible number of inputs
+
+	for (int i = 0; i < nbrInputs; i++) {
+
+		int rdmindex = std::rand() % InputNodes.size();	//Selects a possible input node at random
+
+		InputNodes[rdmindex]->addOutput(&node);			//Creates the link
+		node.addInput(InputNodes[rdmindex]);				//
+
+		InputNodes.erase(InputNodes.begin() + rdmindex);	//Deletes this node from the list of possible inputs
+	}
+}
+
+void LogicGateNN::NeuralNetwork::create_random_output_link(LogicGateNN::Node node, int nbr) {
+	/*
+	Creates n=nbr output links on the specified node at random, except if its not possible to do that many
+	*/
+	std::vector<LogicGateNN::Node*> OutputNodes;
+
+	for (int i = node.getLayer() + 1; i < this->Network.size(); i++) {
+		for (LogicGateNN::Node b : this->Network[i]) {	//Creates an array of all potential output nodes
+			OutputNodes.push_back(&b);
+		}
+	}
+	int nbrOutputs = std::min(std::rand() % 3 + 1, (int)OutputNodes.size());	//Makes between 1 and 3 output links, except if that's more than the possible number of outputs
+
+	for (int i = 0; i < nbrOutputs; i++) {
+
+		int rdmindex = std::rand() % OutputNodes.size();	//Selects a possible input node at random
+
+		OutputNodes[rdmindex]->addInput(&node);			//Creates the link
+		node.addOutput(OutputNodes[rdmindex]);				//
+
+		OutputNodes.erase(OutputNodes.begin() + rdmindex);	//Deletes this node from the list of possible inputs
 	}
 }
