@@ -16,6 +16,10 @@ namespace LogicGateNN {
 
 		bool output;						//Output
 
+		//These two are private because they should only be called by delLink, else they half-ass the job
+		void delInput(std::string ID);		//Removes the input with specified ID
+		void delOutput(std::string ID);		//Removes the output with specified ID
+
 	public:
 		//Maybe make those private?
 		std::vector<Node*> inputNodes;			//Pointers to the nodes that send inputs
@@ -35,9 +39,11 @@ namespace LogicGateNN {
 		void setOutput(bool output);										//Sets the value of the output regardless of the inputs
 		std::string getID();												//returns the ID
 		int getLayer();														//returns the layer in which this node is located
+		void setLayer(int layer);											//Sets the ayer of this node to be whatever the value specified is
 		void addInput(LogicGateNN::Node* InNode);							//Adds an input to this node
 		void addOutput(LogicGateNN::Node* OutNode);							//Adds an output to this node
 		void setGate(bool (*func)(std::vector<bool>));						//Changes the logic gate applied by the node
+		void delLink(std::string ID);										//Deletes the link with the node of specified ID
 	};
 }
 

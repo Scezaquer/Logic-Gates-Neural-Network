@@ -1,7 +1,7 @@
 /*
 @file NeuralNetwork.h
 @author Aurélien Bück-Kaeffer
-@version 0.8 13/10/2021
+@version 0.9 24/10/2021
 */
 
 //TODO: this class, and give it mutation functions to use it with genetic algorithms
@@ -40,6 +40,8 @@ namespace LogicGateNN {
 		std::vector<bool> getOutputs();	//return the current values of the last layer, DOES NOT UPDATE THEM, USE NeuralNetwork.run() FOR THAT
 		void setInputs(std::vector<bool> inputs);	//Sets the inputs of the network to be whatever is specified. Does not update it. (use run for that)
 		
+		LogicGateNN::Node* get_node(std::string ID);	//Returns a pointer to the node with said ID
+		
 		//Possible mutations
 		void create_node(int layer, bool (*gate)(std::vector<bool>));
 		void create_node(int layer, bool (*gate)(std::vector<bool>), std::string ID);
@@ -49,7 +51,7 @@ namespace LogicGateNN {
 		void create_random_input_link(LogicGateNN::Node node, int nbr);
 		void create_random_output_link(LogicGateNN::Node node, int nbr);
 		void create_layer(int index);
-		void delete_link(LogicGateNN::Node node, std::string ID);
+		void delete_link(LogicGateNN::Node* node, std::string ID);
 		void delete_node(std::string ID);
 
 		void mutate();

@@ -154,3 +154,54 @@ void LogicGateNN::Node::setGate(bool (*func)(std::vector<bool>)) {
 	*/
 	this->gate = func;
 }
+
+void LogicGateNN::Node::setLayer(int layer) {
+	this->layer = layer;
+}
+
+void LogicGateNN::Node::delInput(std::string ID) {
+	for (int x = 0; x < this->inputNodes.size(); x++) {
+		if (this->inputNodes[x]->getID() == ID) {
+			this->inputNodes.erase(this->inputNodes.begin() + x);
+			break;
+		}
+	}
+	for (int x = 0; x < this->inputIDs.size(); x++) {
+		if (this->inputIDs[x] == ID) {
+			this->inputIDs.erase(this->inputIDs.begin() + x);
+			break;
+		}
+	}
+}
+
+void LogicGateNN::Node::delOutput(std::string ID) {
+	for (int x = 0; x < this->outputNodes.size(); x++) {
+		if (this->outputNodes[x]->getID() == ID) {
+			this->outputNodes.erase(this->outputNodes.begin() + x);
+			break;	//There should only be one link per node so thats fine
+		}
+	}
+	for (int x = 0; x < this->outputIDs.size(); x++) {
+		if (this->outputIDs[x] == ID) {
+			this->outputIDs.erase(this->outputIDs.begin() + x);
+			break;	//There should only be one link per node so thats fine
+		}
+	}
+}
+
+void LogicGateNN::Node::delLink(std::string ID) {
+	for (LogicGateNN::Node* x : this->inputNodes) {
+		if (x->getID() == ID) {
+			x->delOutput(this->ID);
+			break; //There should only be one link per node so thats fine
+		}
+	}
+	for (LogicGateNN::Node* x : this->outputNodes) {
+		if (x->getID() == ID) {
+			x->delInput(this->ID);
+			break;	//There should only be one link per node so thats fine
+		}
+	}
+	this->delInput(ID);
+	this->delOutput(ID);
+}

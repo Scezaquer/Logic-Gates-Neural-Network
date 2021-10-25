@@ -332,3 +332,63 @@ void LogicGateNN::NeuralNetwork::create_random_output_link(LogicGateNN::Node nod
 		OutputNodes.erase(OutputNodes.begin() + rdmindex);	//Deletes this node from the list of possible inputs
 	}
 }
+
+void LogicGateNN::NeuralNetwork::create_link(std::string ID_1, std::string ID_2) {
+	LogicGateNN::Node* inpt_node;
+	LogicGateNN::Node* outpt_node;
+	for (std::vector<LogicGateNN::Node> x : this->Network) {
+		for (LogicGateNN::Node y : x) {
+			if (y.getID() == ID_1) {
+				inpt_node = &y;
+			}
+			if (y.getID() == ID_2) {
+				outpt_node = &y;
+			}
+		}
+	}
+
+	inpt_node->addOutput(outpt_node);
+	outpt_node->addInput(inpt_node);
+}
+
+void LogicGateNN::NeuralNetwork::create_layer(int index) {
+	this->Network.insert(this->Network.begin() + index, std::vector<LogicGateNN::Node>());
+
+	for (int x = index + 1; x < this->Network.size(); x++) {
+		for (LogicGateNN::Node y : this->Network[x]) {
+			y.setLayer(x);
+		}
+	}
+}
+
+void LogicGateNN::NeuralNetwork::delete_link(LogicGateNN::Node* node, std::string ID) {
+	node->delLink(ID);
+}
+
+LogicGateNN::Node* LogicGateNN::NeuralNetwork::get_node(std::string ID) {
+	for (std::vector<LogicGateNN::Node> x : this->Network) {
+		for (LogicGateNN::Node y : x) {
+			if (y.getID() == ID) {
+				return &y;
+			}
+		}
+	}
+	return nullptr;
+}
+
+void LogicGateNN::NeuralNetwork::delete_node(std::string ID) {
+	LogicGateNN::Node* node = this->get_node(ID);
+	for (std::string x : node->inputIDs) {
+		node->delLink(x);
+	}
+	for (std::string x : node->outputIDs) {
+		node->delLink(x);
+	}
+
+	for (int x = 0; x < this->Network[node->getLayer()].size(); x++) {
+		if (this->Network[node->getLayer()][x].getID() == ID) {
+			this->Network[node->getLayer()].erase(this->Network[node->getLayer()].begin() + x);
+			break;
+		}
+	}
+}
