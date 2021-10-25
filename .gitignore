@@ -11,3 +11,7 @@
 *.db
 *.ipch
 .vs/LogicGateNN/v16/.suo
+*.filters
+*.vcxproj
+*.user
+.vs
