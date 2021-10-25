@@ -204,6 +204,7 @@ std::vector<bool> LogicGateNN::NeuralNetwork::run(int index, bool value) {
 	*/
 	this->Network[0][index].setOutput(value);
 	this->Network[0][index].run();
+	return this->getOutputs();
 }
 
 std::vector<bool> LogicGateNN::NeuralNetwork::run(std::vector<bool> inputs) {
@@ -334,8 +335,8 @@ void LogicGateNN::NeuralNetwork::create_random_output_link(LogicGateNN::Node nod
 }
 
 void LogicGateNN::NeuralNetwork::create_link(std::string ID_1, std::string ID_2) {
-	LogicGateNN::Node* inpt_node;
-	LogicGateNN::Node* outpt_node;
+	LogicGateNN::Node* inpt_node = nullptr;
+	LogicGateNN::Node* outpt_node = nullptr;
 	for (std::vector<LogicGateNN::Node> x : this->Network) {
 		for (LogicGateNN::Node y : x) {
 			if (y.getID() == ID_1) {
