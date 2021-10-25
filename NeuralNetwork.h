@@ -8,6 +8,7 @@
 //TODO: Handle exceptions
 
 #include "Node.h"
+//test
 
 #ifndef NEURALNETWORK
 #define NEURALNETWORK

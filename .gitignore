@@ -15,3 +15,7 @@
 *.vcxproj
 *.user
 .vs
+*.ipch
+*.db
+.vs/LogicGateNN/v16/Browse.VC.db
+.vs/LogicGateNN/v16/ipch/8fd241f8820c3500.ipch
