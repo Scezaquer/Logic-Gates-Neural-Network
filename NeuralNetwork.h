@@ -1,13 +1,14 @@
 /*
 @file NeuralNetwork.h
 @author Aurélien Bück-Kaeffer
-@version 0.9 24/10/2021
+@version 0.10 24/10/2021
 */
 
 //TODO: this class, and give it mutation functions to use it with genetic algorithms
 //TODO: Handle exceptions
 
 #include "Node.h"
+#include <map>
 
 #ifndef NEURALNETWORK
 #define NEURALNETWORK
@@ -20,6 +21,9 @@ namespace LogicGateNN {
 	private:
 		Net topology;										//Topology of the network (an array of dim 3 containing information to build each node (see NeuralNetwork.cpp))
 		std::vector<std::vector<LogicGateNN::Node>> Network;//Array of dim 2 containing all the nodes making up the network
+		std::map<std::string, LogicGateNN::Node*> hashmap;	//hashmap containing pointers to every node accessible with their IDs
+		
+		void generate_hashmap();
 		/*
 		Network.size() is the number of lazers
 		Network[0].size is the number of inputs
@@ -48,6 +52,7 @@ namespace LogicGateNN {
 		void create_lonely_node(int layer, bool (*gate)(std::vector<bool>));
 		void create_lonely_node(int layer, bool (*gate)(std::vector<bool>), std::string ID);
 		void create_link(std::string ID_1, std::string ID_2);
+		void create_link(LogicGateNN::Node* inpt_node, LogicGateNN::Node* outpt_node);
 		void create_random_input_link(LogicGateNN::Node node, int nbr);
 		void create_random_output_link(LogicGateNN::Node node, int nbr);
 		void create_layer(int index);

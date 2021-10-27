@@ -1,4 +1,12 @@
-﻿  NeuralNetwork.cpp
+﻿  pch.cpp
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\IDgenerator.h(16,3): warning C4091: 'static ' : ignoré à gauche de 'LogicGateNN::IDgenerator' quand aucune variable n'est déclarée
+  Gates.cpp
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Gates.cpp(6,20): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Gates.cpp(14,20): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Gates.cpp(30,20): warning C4018: '<' : incompatibilité signed/unsigned
+  IDgenerator.cpp
+  LogicGateNN.cpp
+  NeuralNetwork.cpp
 C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(59,20): warning C4018: '<' : incompatibilité signed/unsigned
 C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(60,21): warning C4018: '<' : incompatibilité signed/unsigned
 C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(65,23): warning C4018: '<' : incompatibilité signed/unsigned
@@ -9,17 +17,16 @@ C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp
 C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(88,24): warning C4018: '<' : incompatibilité signed/unsigned
 C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(94,8): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
 C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(95,8): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(162,29): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(189,20): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(248,20): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(319,38): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(358,28): warning C4018: '<' : incompatibilité signed/unsigned
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(389,20): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(163,29): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(199,20): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(258,20): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(332,38): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(385,28): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(417,20): warning C4018: '<' : incompatibilité signed/unsigned
   Node.cpp
 C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Node.cpp(163,20): warning C4018: '<' : incompatibilité signed/unsigned
 C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Node.cpp(169,20): warning C4018: '<' : incompatibilité signed/unsigned
 C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Node.cpp(178,20): warning C4018: '<' : incompatibilité signed/unsigned
 C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Node.cpp(184,20): warning C4018: '<' : incompatibilité signed/unsigned
   Génération de code en cours...
-C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\NeuralNetwork.cpp(373): warning C4172: retourne l'adresse d'une variable locale ou : y temporaire
   LogicGateNN.vcxproj -> C:\Users\Aurélien\Documents\GitHub\Logic-Gates-Neural-Network\Debug\LogicGateNN.lib

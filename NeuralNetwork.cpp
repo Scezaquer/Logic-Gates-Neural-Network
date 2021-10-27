@@ -105,6 +105,7 @@ LogicGateNN::NeuralNetwork::NeuralNetwork(LogicGateNN::NeuralNetwork::Net topolo
 
 		}
 	}
+	this->generate_hashmap();
 }
 
 LogicGateNN::NeuralNetwork::NeuralNetwork(int Ninputs, int Noutputs, bool autofill) {
@@ -183,6 +184,15 @@ LogicGateNN::NeuralNetwork::NeuralNetwork(int Ninputs, int Noutputs, bool autofi
 			}
 		}
 	}
+	this->generate_hashmap();
+}
+
+void LogicGateNN::NeuralNetwork::generate_hashmap() {
+	for (std::vector<LogicGateNN::Node> x : this->Network) {
+		for (LogicGateNN::Node y : x) {
+			this->hashmap[y.getID()] = &y;
+		}
+	}
 }
 
 std::vector<bool> LogicGateNN::NeuralNetwork::run() {
@@ -259,6 +269,7 @@ void LogicGateNN::NeuralNetwork::create_node(int layer, bool (*gate)(std::vector
 	this->create_random_input_link(node, 1);
 	this->create_random_output_link(node, 1);
 	this->Network[layer].push_back(node);
+	this->hashmap[node.getID()] = &Network[layer].back();
 }
 
 void LogicGateNN::NeuralNetwork::create_node(int layer, bool (*gate)(std::vector<bool>), std::string ID) {
@@ -270,6 +281,7 @@ void LogicGateNN::NeuralNetwork::create_node(int layer, bool (*gate)(std::vector
 	this->create_random_input_link(node, 1);
 	this->create_random_output_link(node, 1);
 	this->Network[layer].push_back(node);
+	this->hashmap[node.getID()] = &Network[layer].back();
 }
 
 void LogicGateNN::NeuralNetwork::create_lonely_node(int layer, bool (*gate)(std::vector<bool>)) {
@@ -277,6 +289,7 @@ void LogicGateNN::NeuralNetwork::create_lonely_node(int layer, bool (*gate)(std:
 	Creates a node in the specified layer with no links. It is useless by itself.
 	*/
 	this->Network[layer].push_back(LogicGateNN::Node(1, 1, gate, layer));
+	this->hashmap[Network[layer].back().getID()] = &Network[layer].back();
 }
 
 void LogicGateNN::NeuralNetwork::create_lonely_node(int layer, bool (*gate)(std::vector<bool>), std::string ID) {
@@ -284,6 +297,7 @@ void LogicGateNN::NeuralNetwork::create_lonely_node(int layer, bool (*gate)(std:
 	Creates a node in the specified layer with no links and a user-defined ID. It is useless by itself.
 	*/
 	this->Network[layer].push_back(LogicGateNN::Node(1, 1, gate, layer, ID));
+	this->hashmap[Network[layer].back().getID()] = &Network[layer].back();
 }
 
 void LogicGateNN::NeuralNetwork::create_random_input_link(LogicGateNN::Node node, int nbr) {
@@ -303,8 +317,7 @@ void LogicGateNN::NeuralNetwork::create_random_input_link(LogicGateNN::Node node
 
 		int rdmindex = std::rand() % InputNodes.size();	//Selects a possible input node at random
 
-		InputNodes[rdmindex]->addOutput(&node);			//Creates the link
-		node.addInput(InputNodes[rdmindex]);				//
+		this->create_link(InputNodes[rdmindex], &node);
 
 		InputNodes.erase(InputNodes.begin() + rdmindex);	//Deletes this node from the list of possible inputs
 	}
@@ -327,17 +340,21 @@ void LogicGateNN::NeuralNetwork::create_random_output_link(LogicGateNN::Node nod
 
 		int rdmindex = std::rand() % OutputNodes.size();	//Selects a possible input node at random
 
-		OutputNodes[rdmindex]->addInput(&node);			//Creates the link
-		node.addOutput(OutputNodes[rdmindex]);				//
+		this->create_link(&node, OutputNodes[rdmindex]);
 
 		OutputNodes.erase(OutputNodes.begin() + rdmindex);	//Deletes this node from the list of possible inputs
 	}
 }
 
 void LogicGateNN::NeuralNetwork::create_link(std::string ID_1, std::string ID_2) {
-	LogicGateNN::Node* inpt_node = nullptr;
+	/*-
+	Creates a link between the nodes having the specified IDs
+	Only works if the output node is in a layer with greater index that the input node
+	*/
+
+	/*LogicGateNN::Node* inpt_node = nullptr;
 	LogicGateNN::Node* outpt_node = nullptr;
-	for (std::vector<LogicGateNN::Node> x : this->Network) {
+	for (std::vector<LogicGateNN::Node> x : this->Network) {//Goes through every node and finds the ones with the specified IDs
 		for (LogicGateNN::Node y : x) {
 			if (y.getID() == ID_1) {
 				inpt_node = &y;
@@ -346,13 +363,26 @@ void LogicGateNN::NeuralNetwork::create_link(std::string ID_1, std::string ID_2)
 				outpt_node = &y;
 			}
 		}
-	}
+	}*/
 
-	inpt_node->addOutput(outpt_node);
-	outpt_node->addInput(inpt_node);
+	this->create_link(this->hashmap[ID_1], this->hashmap[ID_2]);
+}
+
+void LogicGateNN::NeuralNetwork::create_link(LogicGateNN::Node* inpt_node, LogicGateNN::Node* outpt_node) {
+	/*
+	Creates a link between the specified nodes
+	Only works if the output node is in a layer with greater index that the input node
+	*/
+	if (inpt_node->getLayer() < outpt_node->getLayer()) {
+		inpt_node->addOutput(outpt_node);
+		outpt_node->addInput(inpt_node);
+	}
 }
 
 void LogicGateNN::NeuralNetwork::create_layer(int index) {
+	/*
+	Creates an empty layer at the specified index, pushing the ones further back by 1
+	*/
 	this->Network.insert(this->Network.begin() + index, std::vector<LogicGateNN::Node>());
 
 	for (int x = index + 1; x < this->Network.size(); x++) {
@@ -367,29 +397,37 @@ void LogicGateNN::NeuralNetwork::delete_link(LogicGateNN::Node* node, std::strin
 }
 
 LogicGateNN::Node* LogicGateNN::NeuralNetwork::get_node(std::string ID) {
-	for (std::vector<LogicGateNN::Node> x : this->Network) {
+	return this->hashmap[ID];
+	/*for (std::vector<LogicGateNN::Node> x : this->Network) {
 		for (LogicGateNN::Node y : x) {
 			if (y.getID() == ID) {
 				return &y;
 			}
 		}
 	}
-	return nullptr;
+	return nullptr;*/
 }
 
 void LogicGateNN::NeuralNetwork::delete_node(std::string ID) {
-	LogicGateNN::Node* node = this->get_node(ID);
-	for (std::string x : node->inputIDs) {
+	/*
+	Deletes the node with the specified ID
+	*/
+	LogicGateNN::Node* node = this->get_node(ID);//gets the node with corresponding ID
+
+	//We need to delete every link to remove this node from the list of inputs and outputs of every connected node
+	for (std::string x : node->inputIDs) {	//Delete every input link
 		node->delLink(x);
 	}
-	for (std::string x : node->outputIDs) {
+	for (std::string x : node->outputIDs) {	//Delete every output link
 		node->delLink(x);
 	}
 
 	for (int x = 0; x < this->Network[node->getLayer()].size(); x++) {
 		if (this->Network[node->getLayer()][x].getID() == ID) {
+			//Removes the node from the array
 			this->Network[node->getLayer()].erase(this->Network[node->getLayer()].begin() + x);
 			break;
 		}
 	}
+	this->hashmap.erase(ID);	//Removes the node pointer from the hashmap
 }
