@@ -128,6 +128,7 @@ This package is meant to be used combined with a genetic algorithm to evolve qua
 
 ### Run
 `void LogicgateNN::Node::run()` : Runs the node (evaluate + sends inputs to the next nodes). This function updates the output depending on the current inputs. It runs all the output nodes if the output from this one has changed only, to only compute what is necessary.
+TODO: Update this so that the nodes are updated following a breadth first network traversal to only update each node once and save power
 
 `void LogicgateNN::Node::run(bool state)` : Runs the node after setting its output to whatever state is if it has changed. I do not recommed using this on anything other than nodes from the first layer
 
